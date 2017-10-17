@@ -95,7 +95,12 @@ kubeadm reset
 kubeadm init --config /tmp/kubeadm.yaml
 rm /tmp/kubeadm.yaml
 
-# Use the local kubectl config for further kubectl operations
+# Initialize kubectl
+mkdir -p /home/centos/.kube
+cp -i /etc/kubernetes/admin.conf /home/centos/.kube/config
+chown centos:centos /home/centos/.kube/config
+
+# Use the local kubectl config for further kubectl operations (x509 fix)
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
 # Install calico
